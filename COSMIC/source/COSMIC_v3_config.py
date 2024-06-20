@@ -11,7 +11,7 @@ import amuse.units.units as u
 import datetime
 
 def params_dic():
-    params_list = ["N_stars", "timestep", "output_times", "R0_king", "W0_king", "metallicity_stellar", "M_min_salpeter", "M_max_salpeter", "a_salpeter", "binary_fraction", "mean_period", "std_period", "X_coefficient_OBA", "X_coefficient_GKM", "out_directory", "in_directory", "config", "filename", "workers_stellar", "workers_gravity", "format_type"]
+    params_list = ["N_stars", "timestep", "output_times", "R0_king", "W0_king", "metallicity_stellar", "M_min_salpeter", "M_max_salpeter", "a_salpeter", "binary_fraction", "mean_period", "std_period", "X_coefficient_OBA", "X_coefficient_GKM", "cluster_position_x", "cluster_position_y", "cluster_position_z", "out_directory", "in_directory", "config", "filename", "workers_stellar", "workers_gravity", "format_type"]
     params = {i:0 for i in params_list}
     return params, params_list
 
@@ -42,6 +42,9 @@ def default():
     params["std_period"] = np.float32(2.4) # Orbital period deviation of binary systems
     params["X_coefficient_OBA"] = np.float32(1.4e-7) # X-ray luminosity coefficient for O, B and A type stars
     params["X_coefficient_GKM"] = np.float32(1.4e27) # X-ray luminosity coefficient for G, K and M type stars
+    params["cluster_position_x"] = np.float32(7000)|u.pc # Position of the cluster in the disk along the sun-center axis
+    params["cluster_position_y"] = np.float32(0)|u.pc # Position of the cluster in the disk in the perpendicular direction
+    params["cluster_position_z"] = np.float32(0)|u.pc # Position of the cluster above or below the disk
     params["out_directory"] = "./output/"
     params["in_directory"] = "./input/"
     params["config"] = "default.cfg"
@@ -68,6 +71,9 @@ def change_params(params, cfg_param, cfg_values):
     elif cfg_param == "std_period": params["std_period"] = np.float32(cfg_values[0])
     elif cfg_param == "X_coefficient_OBA": params["X_coefficient_OBA"] = np.float32(cfg_values[0])
     elif cfg_param == "X_coefficient_GKM": params["X_coefficient_GKM"] = np.float32(cfg_values[0])
+    elif cfg_param == "cluster_position_x": params["cluster_position_x"] = np.float32(cfg_values[0])|u.pc
+    elif cfg_param == "cluster_position_y": params["cluster_position_y"] = np.float32(cfg_values[0])|u.pc
+    elif cfg_param == "cluster_position_z": params["cluster_position_z"] = np.float32(cfg_values[0])|u.pc
     elif cfg_param == "out_directory": params["out_directory"] = cfg_values[0].replace("\n", "")
     elif cfg_param == "in_directory": params["in_directory"] = cfg_values[0].replace("\n", "")
     elif cfg_param == "config": params["config"] = cfg_values[0].replace("\n", "")

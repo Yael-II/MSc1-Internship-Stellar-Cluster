@@ -23,5 +23,31 @@ def X_emission(stars, params):
         elif stars[i].temperature.value_in(u.K) < 6000: # G K M
             stars[i].X_luminosity = params["X_coefficient_GKM"] * (stars[i].X_vsini.value_in(u.km * u.s**(-1)))**(1.9) | u.erg * u.s**(-1)
         else: # F
-            stars[i].X_luminosity = 0
+            stars[i].X_luminosity = 0 | u.erg * u.s**(-1)
+    return stars
+
+def plasma_temperature(stars, params):
+    for i in range(len(stars)):
+        if stars[i].temperature.value_in(u.K) > 7300 : # O B A
+            if stars[i].age.value_in(u.Myr) < 150: # young
+                stars[i].X_temperature_0 = 0.6 | u.kilo(u.eV)
+                stars[i].X_temperature_1 = 0.0 | u.kilo(u.eV)
+            else: # old
+                stars[i].X_temperature_0 = 0.5 | u.kilo(u.eV)
+                stars[i].X_temperature_1 = 0.0 | u.kilo(u.eV)
+        elif stars[i].temperature.value_in(u.K) < 6000: # G K M
+            if stars[i].age.value_in(u.Myr) < 150: # young
+                stars[i].X_temperature_0 = 0.4 | u.kilo(u.eV)
+                stars[i].X_temperature_1 = 1.0 | u.kilo(u.eV)
+            else: # old
+                stars[i].X_temperature_0 = 0.2 | u.kilo(u.eV)
+                stars[i].X_temperature_1 = 0.8 | u.kilo(u.eV)
+        else: # F
+            if stars[i].age.value_in(u.Myr) < 150: # young
+                stars[i].X_temperature_0 = 0.6 | u.kilo(u.eV)
+                stars[i].X_temperature_1 = 0.0 | u.kilo(u.eV)
+            else: # old
+                stars[i].X_temperature_0 = 0.5 | u.kilo(u.eV)
+                stars[i].X_temperature_1 = 0.0 | u.kilo(u.eV)
+
     return stars

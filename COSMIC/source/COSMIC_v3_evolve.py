@@ -10,6 +10,7 @@ import numpy as np
 import amuse.units.units as u
 import COSMIC_v3_output as output
 import COSMIC_v3_emission as emission
+import COSMIC_v3_coordinates as coords
 
 def stellar_gravity(codes, stars, channels, params, save_stars = False):
     """
@@ -32,9 +33,11 @@ def stellar_gravity_binaries(codes, stars, binaries, channels, params, save_star
         print("\033[36m"+"t: "+"\033[0m"+"{:02.2f} Myr/{:02.2f} Myr".format(t.value_in(u.Myr),np.max(params["output_times"].value_in(u.Myr))))
         codes["b"].evolve_model(t)
         channels.copy()
+        stars = coords.xyz2radecdist(stars)
         if compute_X_emission: 
             stars = emission.rotation(stars, params)
             stars = emission.X_emission(stars, params)
+            stars = emission.plasma_temperature(stars, params)
         if save_stars: output.save_stars(stars, params, t.value_in(u.Myr))
         if save_binaries: output.save_binaries(binaries, params, t.value_in(u.Myr))
 	 

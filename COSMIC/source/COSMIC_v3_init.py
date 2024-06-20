@@ -10,6 +10,7 @@ import numpy as np
 import amuse.units.units as u
 
 import COSMIC_v3_galaxy as galaxy
+import COSMIC_v3_coordinates as coords
 
 from amuse.units import nbody_system
 from amuse.ic.kingmodel import new_king_model
@@ -97,6 +98,7 @@ def king_salpeter_binaries(params):
 
     stars.ra = 0 | u.deg
     stars.dec = 0 | u.deg
+    stars.dist = 0 | u.pc
     stars.X_v = 0 | u.km * u.s**(-1)
     stars.X_vsini = 0 | u.km * u.s**(-1)
     stars.X_temperature_0 = 0 | u.kilo(u.eV)
@@ -120,6 +122,8 @@ def king_salpeter_binaries(params):
         semi_major_axis, eccentricity = orbital_parameters(params, binaries[i].mass_tot)
         binaries[i].semi_major_axis = semi_major_axis
         binaries[i].eccentricity = eccentricity
+
+    stars.move_to_center()
     return stars, binaries, converter
 
 
@@ -140,9 +144,10 @@ def generate_galaxy(stars, params):
     stars.x += params["cluster_position_x"]
     stars.y += params["cluster_position_y"]
     stars.z += params["cluster_position_z"]
-    phi = np.arctan2(stars.center_of_mass().y, stars.center_of_mass().x)
+    phi = np.arctan2(stars.center_of_mass().y.value_in(u.pc), stars.center_of_mass().x.value_in(u.pc))
     stars.vx += - vc * np.sin(phi)
     stars.vy += vc * np.cos(phi)
+    stars = coords.xyz2radecdist(stars)
     return stars, galaxy_model
 
 def add_stars(codes, stars):
