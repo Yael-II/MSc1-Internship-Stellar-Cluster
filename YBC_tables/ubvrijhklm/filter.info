@@ -1,0 +1,11 @@
+#  I   Filter  File                Lamb_C       D_Lamb     Flam_0     Sys   Dev   Mag_zp      NP comments
+   1 U          u_maiz.dat          3598.5445     584.0610   4.2687e-09 Vega  CCD    0.0300      0 #
+   2 B          b_maiz.dat          4385.9244     912.7500   6.3606e-09 Vega  CCD    0.0300      0 #
+   3 V          v_maiz.dat          5490.5551     857.4373   3.6168e-09 Vega  CCD    0.0300      0 #
+   4 R          r_bessell.dat       6594.7209    1591.1579   2.0973e-09 Vega  CCD    0.0300      0 #
+   5 I          i_bessell.dat       8059.8822    1495.0994   1.1123e-09 Vega  CCD    0.0300      0 #
+   6 J          j_bessell.dat      12369.2625    2046.5809   3.0916e-10 Vega  CCD    0.0300      0 #
+   7 H          h_bessell.dat      16464.4483    2854.1417   1.1256e-10 Vega  CCD    0.0300      0 #
+   8 K          k_bessell.dat      22105.4456    3646.1890   3.8958e-11 Vega  CCD    0.0300      0 #
+   9 L          l_bessell.dat      34840.7510    4595.4536   6.9824e-12 Vega  CCD    0.0300      0 #
+  10 M          m_bessell.dat      47339.3251    3559.9992   2.1226e-12 Vega  CCD    0.0300      0 #
