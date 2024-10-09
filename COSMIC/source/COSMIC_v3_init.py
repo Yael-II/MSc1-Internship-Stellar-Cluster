@@ -139,11 +139,11 @@ def create_channels():
     return channels
 
 def generate_galaxy(stars, params):
-    galaxy_model = galaxy.MilkyWay_AMUSE()
+    galaxy_model = galaxy.MilkyWay_Bovy2015()
     stars.x += params["cluster_position_x"]
     stars.y += params["cluster_position_y"]
     stars.z += params["cluster_position_z"]
-    vc = galaxy_model.vel_circ(stars.center_of_mass().length()).in_(u.km * u.s**(-1))
+    vc = galaxy_model.circular_velocity(stars.center_of_mass().length()).in_(u.km * u.s**(-1))
     phi = np.arctan2(stars.center_of_mass().y.value_in(u.pc), stars.center_of_mass().x.value_in(u.pc))
     stars.vx += - vc * np.sin(phi)
     stars.vy += vc * np.cos(phi)

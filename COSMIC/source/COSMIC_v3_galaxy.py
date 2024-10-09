@@ -9,7 +9,9 @@
 import numpy as np
 import matplotlib.pyplot as plt
 import amuse.units.units as u
+from amuse.ext.galactic_potentials import MWpotentialBovy2015
 
+MilkyWay_Bovy2015 = MWpotentialBovy2015
 class MilkyWay_AMUSE(object):
     # THIS IS A COPY OF https://github.com/amusecode/amuse/blob/cdd21cc5cb06e40ccf5ecb86d513d211634e2689/examples/textbook/solar_cluster_in_galaxy_potential.py#L37
 

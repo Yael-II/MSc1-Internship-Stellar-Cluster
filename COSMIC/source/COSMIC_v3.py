@@ -1,5 +1,5 @@
 """
-* COSMIC : Cluster Orbital SysteM Integration Code
+* COSMIC: Cluster Orbital SysteM Integration Code
 * Version 3
 @ Yaël Moussouni
 @ Unistra, P&E, MSc1-MoFP
